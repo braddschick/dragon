@@ -1,0 +1,17 @@
+{
+  "name": "dragon-js",
+  "version": "0.0.1",
+  "description": "Drag and Drop HTML5 slim library to get quick javascript DnD actions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Drag",
+    "Drop",
+    "Html5",
+    "DnD"
+  ],
+  "author": "Bradd Schick [bradd.schick@gmail.com]",
+  "license": "BSD-3-Clause-Clear"
+}
