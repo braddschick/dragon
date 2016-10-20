@@ -1,0 +1,29 @@
+{
+  "name": "dragon_js",
+  "version": "0.1.0",
+  "description": "Simple HTML 5 Drag'n Drop Library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/braddschick/dragon.git"
+  },
+  "keywords": [
+    "html5",
+    "drag",
+    "drop",
+    "dnd"
+  ],
+  "author": "Bradd Schick",
+  "license": "BSD-3-Clause-Clear",
+  "bugs": {
+    "url": "https://github.com/braddschick/dragon/issues"
+  },
+  "homepage": "https://github.com/braddschick/dragon#readme",
+  "devDependencies": {
+    "gulp-uglify": "^2.0.0",
+    "pump": "^1.0.1"
+  }
+}

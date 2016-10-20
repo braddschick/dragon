@@ -157,4 +157,7 @@ createFromTemplate = function(el,d){
   });
   el.parentNode.appendChild(a);
   return a;
+},
+logIt = function(obj){
+  console.info(obj.constructor.name + ': '+ _.allKeys(obj));
 }

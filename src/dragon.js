@@ -1,27 +1,34 @@
-var Dragon = function(s,t,e,f,c,v,w,x,y,z){
+var Dragon = function(s,t,e,f,c){
+  if(s[0] === '#'){
     this.source = document.querySelector(s);
+  }
+  else {
+    this.source = document.querySelector('#'+s);
+  }
+  if(t[0] === '#'){
     this.target = t;
-    this.elements = e;
-    this.effect = f;
-    this.class = c;
-    this.start = v;
-    this.enter = w;
-    this.hover = x;
-    this.leave = y;
-    this.drop = z;
+  }
+  else {
+    this.target = '#'+t;
+  }
+  this.target = t;
+  this.elements = e;
+  this.effect = f;
+  this.class = c;
+
     return this;
-};
+}
 
 Dragon.prototype = {
     constructor: Dragon,
     drop:function(e, t){
         e.preventDefault();
-        if(isNullOrUndefined(t.drop(e))){
-          var id = null, data = e.dataTransfer.getData("text");
+        var id = null, data = e.dataTransfer.getData("text");
           for(var i=0;i<e.target.children.length;i++){
               if(e.target.children[i].id == data){
                   document.getElementById(data).style = 'position: absolute; left: '+e.clientX+'px; top: '+e.clientY+'px;';
                   addEvent(o, 'dragstart', function(r){t.start(r,t);});
+                  jsPlumb.repaintEverything();
                   return true;
               }
           }
@@ -31,45 +38,44 @@ Dragon.prototype = {
             o.style = 'position: absolute; left: '+e.clientX+'px; top: '+e.clientY+'px;';
             o.setAttribute('draggable', 'true');
             addEvent(o, 'dragstart', function(r){t.start(r,t);});
+            addEvent(o, 'click', function(){openUrl(o);});
             e.target.appendChild(o);
           }
           else {
             document.getElementById(data).style = 'position: absolute; left: '+e.clientX+'px; top: '+e.clientY+'px;';
-            id = data;
+            // id = data;
           }
-        }
-        else {
-          t.drop(e);
-        }
+        // if(!isNullOrUndefined(id)){
+        //   jsPlumb.addEndpoint(id, endpointOptions).bind("click", function (component, originalEvent) {
+        //       jsPlumb.select(component.connections[0]).detach();
+        //   });
+        //   if(!isNullOrUndefined(db[data])){
+        //     if(!isNullOrUndefined(db[data].business)){
+        //       if(!contains(document.getElementById('bizValue').parentElement.innerHTML, db[data].business.head)){
+        //         createFromTemplate(document.getElementById('bizValue'),db[data]);
+        //       }
+        //     }
+        //     if(!isNullOrUndefined(db[data].ask)){
+        //       if(!contains(document.getElementById('ask').parentElement.innerHTML,db[data].ask)){
+        //         createFromTemplate(document.getElementById('ask'),db[data]);
+        //       }
+        //     }
+        //   }          
+        // }
     },
     over:function(e, t){
         e.preventDefault();
         e.dataTransfer.dropEffect = t.effect;
-        if(!isNullOrUndefined(t.over)){
-          t.over(e);
-        }
     },
     enter:function(e, t){
         e.preventDefault();
-        if(!isNullOrUndefined(t.enter)){
-          t.enter(e);
-        }
     },
     leave:function(e, t){
         e.preventDefault();
-        if(!isNullOrUndefined(t.leave)){
-          t.leave(e);
-        }
     },
     start:function(e, t){
-      if(isNullOrUndefined(t.start)){
-        e.preventDefault();
         e.dataTransfer.setData("text", e.target.id);
         e.dataTransfer.effectAllowed = t.effect;
-      }
-      else {
-        t.start(e);
-      }
     },
     set:function(){
       var that = this;
