@@ -1,6 +1,8 @@
-var gulp = require('gulp');
-var uglify = require('gulp-uglify');
-var pump = require('pump');
+var gulp = require('gulp'),
+uglify = require('gulp-uglify'), 
+pump = require('pump'), 
+concat = require('gulp-concat'), 
+uglify = require('gulp-uglify');
 
 var options = {
     sequences     : true,  // join consecutive statemets with the “comma operator”
@@ -21,12 +23,17 @@ var options = {
     cascade       : true,  // try to cascade `right` into `left` in sequences
     side_effects  : true,  // drop side-effect-free statements
     warnings      : true
-};
+},files = [
+    'src/partial_underscore.js',
+    'src/utils.js',
+    'src/dragon.js'
+];
 
 
 gulp.task('compress', function (cb) {
   pump([
-        gulp.src('src/*.js'),
+        gulp.src(files),
+        concat('dragon.min.js'),
         uglify(options),
         gulp.dest('dist')
     ],

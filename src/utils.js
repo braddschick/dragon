@@ -160,4 +160,7 @@ createFromTemplate = function(el,d){
 },
 logIt = function(obj){
   console.info(obj.constructor.name + ': '+ _.allKeys(obj));
+},
+isBoolean = function(o){
+  return o === true || o === false || toString.call(o) === '[object Boolean]';
 }

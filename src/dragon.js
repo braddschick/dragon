@@ -19,7 +19,12 @@ var Dragon = function(s,t,e,f,c,a){
     this.append = false;
   }
   else {
-    this.append = a;
+    if(isBoolean(a)){
+      this.append = a;
+    }
+    else {
+      this.append = false;
+    }
   }
 
     return this;
@@ -30,33 +35,31 @@ Dragon.prototype = {
     drop:function(e, t){
       e.preventDefault();
       var id = null, data = e.dataTransfer.getData("text");
-      logIt(e);
-      // console.info('x: '+e.clientX + ' y:'+e.clientY);
-      // console.info('screen x: '+e.screenX+' screen y:'+e.screenY);
-      // console.info('page x: '+e.pageX+' page y:'+e.pageY);
-      // console.info('offset x: '+e.offsetX+' offset y:'+e.offsetY);
-      // console.info('move x: '+e.movementX+' move y:'+e.movementY);
-      // console.info('layer x: '+e.layerX+' layer y:'+e.layerY);
-        for(var i=0;i<e.target.children.length;i++){
-            if(e.target.children[i].id == data){
-                document.getElementById(data).style = 'position: absolute; left: '+e.clientX+'px; top: '+e.clientY+'px;';
-                addEvent(o, 'dragstart', function(r){t.start(r,t);});
-                return true;
-            }
-        }
-        if(t.effect === 'copy'){
-          var o = clone(document.getElementById(data));
-          id = o.id;
-          if(!t.append){
-            o.style = 'position: absolute; left: '+e.clientX+'px; top: '+e.clientY+'px;';
+      for(var i=0;i<e.target.children.length;i++){
+          if(e.target.children[i].id == data){
+              document.getElementById(data).style = 'position: absolute; left: '+e.clientX+'px; top: '+e.clientY+'px;';
+              addEvent(o, 'dragstart', function(r){t.start(r,t);});
+              return true;
           }
-          o.setAttribute('draggable', 'true');
-          addEvent(o, 'dragstart', function(r){t.start(r,t);});
-          e.target.appendChild(o);
+      }
+      if(t.effect === 'copy'){
+        var o = clone(document.getElementById(data));
+        id = o.id;
+        if(!t.append){
+          o.style = 'position: absolute; left: '+e.clientX+'px; top: '+e.clientY+'px;';
         }
-        else {
+        o.setAttribute('draggable', 'true');
+        addEvent(o, 'dragstart', function(r){t.start(r,t);});
+        e.target.appendChild(o);
+      }
+      else {
+        if(!t.append){
           document.getElementById(data).style = 'position: absolute; left: '+e.clientX+'px; top: '+e.clientY+'px;';
         }
+        else {
+          e.target.appendChild(document.getElementById(data));
+        }
+      }
     },
     over:function(e, t){
         e.preventDefault();
