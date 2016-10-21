@@ -1,5 +1,5 @@
 # Dragon
-    HTML5 Drag _n_ Drop slim <5kb library for quick and easy deployment to any web application.
+    HTML5 Drag and Drop slim (< 5_kb_) library for quick and easy deployment to any web application.
 
 ## Usage
 Simple and straight forward...
