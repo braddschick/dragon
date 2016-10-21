@@ -65,17 +65,17 @@ function hasClass(el, className) {
 }
 
 function addClass(el, className) {
-  if (el.classList)
-    el.classList.add(className)
+  if (!isNullOrUndefined(el.classList))
+    el.classList.add(className);
   else if (!hasClass(el, className)) el.className += " " + className
 }
 
 function removeClass(el, className) {
-  if (el.classList)
-    el.classList.remove(className)
+  if (!isNullOrUndefined(el.classList))
+    el.classList.remove(className);
   else if (hasClass(el, className)) {
-    var reg = new RegExp('(\\s|^)' + className + '(\\s|$)')
-    el.className=el.className.replace(reg, ' ')
+    var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
+    el.className=el.className.replace(reg, ' ');
   }
 }
 var contains = function(o,i){
@@ -86,7 +86,7 @@ findByAttribute = function(o,a){
   var t = null;
   if(!isNullOrUndefined(d) && o.getAttribute(a)){
     _.each(d, function(k,v,l){
-      if(!isNullOrUndefined(k.getAttribute(a)) && 
+      if(!isNullOrUndefined(k.getAttribute(a)) &&
         !_.isEqual(k.getAttribute('id'),o.getAttribute('id'))){
         if(_.isEqual(k.getAttribute(a),o.getAttribute(a)) ){
           t = k;

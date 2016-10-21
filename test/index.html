@@ -5,9 +5,12 @@
         <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css" />
         <style type="text/css">
             #drop1, #drop2, #icon_area_move, #icon_area_copy {
-                width: 400px;
+                min-width: 400px;
                 border: solid 2px #eee;
-                height: 100px;
+                min-height: 100px;
+            }
+            .onHover {
+              border: dashed 4px #eee;
             }
         </style>
     </head>
@@ -24,17 +27,16 @@
                 <img id="copy" src="https://dummyimage.com/100x100/000/fff.png" width="100" height="100" />
             </div>
             <div id="drop2" class="mdl-cell mdl-cell--8">
-                
+
             </div>
         </div>
         <script src="../src/partial_underscore.js" type="text/javascript"></script>
         <script src="../src/utils.js" type="text/javascript"></script>
-        <script src="../src/old_dragon.js" type="text/javascript"></script>
+        <script src="../src/dragon.js" type="text/javascript"></script>
         <script type="text/javascript">
             var a = new Dragon('#icon_area_move','#drop1','img','move');
             a.set();
-            var b = new Dragon('#icon_area_copy','#drop2','img','copy');
-            b.set();
+            var b = new Dragon('icon_area_copy','#drop2','img','copy', 'onHover', true).set();
         </script>
     </body>
 </html>

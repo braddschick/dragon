@@ -1,4 +1,4 @@
-var Dragon = function(s,t,e,f,c){
+var Dragon = function(s,t,e,f,c,a){
   if(s[0] === '#'){
     this.source = document.querySelector(s);
   }
@@ -15,6 +15,12 @@ var Dragon = function(s,t,e,f,c){
   this.elements = e;
   this.effect = f;
   this.class = c;
+  if(isNullOrUndefined(a)){
+    this.append = false;
+  }
+  else {
+    this.append = a;
+  }
 
     return this;
 }
@@ -22,56 +28,52 @@ var Dragon = function(s,t,e,f,c){
 Dragon.prototype = {
     constructor: Dragon,
     drop:function(e, t){
-        e.preventDefault();
-        var id = null, data = e.dataTransfer.getData("text");
-          for(var i=0;i<e.target.children.length;i++){
-              if(e.target.children[i].id == data){
-                  document.getElementById(data).style = 'position: absolute; left: '+e.clientX+'px; top: '+e.clientY+'px;';
-                  addEvent(o, 'dragstart', function(r){t.start(r,t);});
-                  jsPlumb.repaintEverything();
-                  return true;
-              }
-          }
-          if(t.effect === 'copy'){
-            var o = clone(document.getElementById(data));
-            id = o.id;
+      e.preventDefault();
+      var id = null, data = e.dataTransfer.getData("text");
+      logIt(e);
+      // console.info('x: '+e.clientX + ' y:'+e.clientY);
+      // console.info('screen x: '+e.screenX+' screen y:'+e.screenY);
+      // console.info('page x: '+e.pageX+' page y:'+e.pageY);
+      // console.info('offset x: '+e.offsetX+' offset y:'+e.offsetY);
+      // console.info('move x: '+e.movementX+' move y:'+e.movementY);
+      // console.info('layer x: '+e.layerX+' layer y:'+e.layerY);
+        for(var i=0;i<e.target.children.length;i++){
+            if(e.target.children[i].id == data){
+                document.getElementById(data).style = 'position: absolute; left: '+e.clientX+'px; top: '+e.clientY+'px;';
+                addEvent(o, 'dragstart', function(r){t.start(r,t);});
+                return true;
+            }
+        }
+        if(t.effect === 'copy'){
+          var o = clone(document.getElementById(data));
+          id = o.id;
+          if(!t.append){
             o.style = 'position: absolute; left: '+e.clientX+'px; top: '+e.clientY+'px;';
-            o.setAttribute('draggable', 'true');
-            addEvent(o, 'dragstart', function(r){t.start(r,t);});
-            addEvent(o, 'click', function(){openUrl(o);});
-            e.target.appendChild(o);
           }
-          else {
-            document.getElementById(data).style = 'position: absolute; left: '+e.clientX+'px; top: '+e.clientY+'px;';
-            // id = data;
-          }
-        // if(!isNullOrUndefined(id)){
-        //   jsPlumb.addEndpoint(id, endpointOptions).bind("click", function (component, originalEvent) {
-        //       jsPlumb.select(component.connections[0]).detach();
-        //   });
-        //   if(!isNullOrUndefined(db[data])){
-        //     if(!isNullOrUndefined(db[data].business)){
-        //       if(!contains(document.getElementById('bizValue').parentElement.innerHTML, db[data].business.head)){
-        //         createFromTemplate(document.getElementById('bizValue'),db[data]);
-        //       }
-        //     }
-        //     if(!isNullOrUndefined(db[data].ask)){
-        //       if(!contains(document.getElementById('ask').parentElement.innerHTML,db[data].ask)){
-        //         createFromTemplate(document.getElementById('ask'),db[data]);
-        //       }
-        //     }
-        //   }          
-        // }
+          o.setAttribute('draggable', 'true');
+          addEvent(o, 'dragstart', function(r){t.start(r,t);});
+          e.target.appendChild(o);
+        }
+        else {
+          document.getElementById(data).style = 'position: absolute; left: '+e.clientX+'px; top: '+e.clientY+'px;';
+        }
     },
     over:function(e, t){
         e.preventDefault();
         e.dataTransfer.dropEffect = t.effect;
     },
     enter:function(e, t){
-        e.preventDefault();
+      if(!isNullOrUndefined(t.class)){
+        // console.info(e.srcElement);
+        //   addClass(e.srcElement,t.class);
+      }
+      e.preventDefault();
     },
     leave:function(e, t){
-        e.preventDefault();
+      if(!isNullOrUndefined(t.class)){
+          // removeClass(document.querySelector('#'+e.dataTransfer.getData('text')),t.class);
+      }
+      e.preventDefault();
     },
     start:function(e, t){
         e.dataTransfer.setData("text", e.target.id);
