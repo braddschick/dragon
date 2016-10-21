@@ -29,7 +29,6 @@ var options = {
     'src/dragon.js'
 ];
 
-
 gulp.task('compress', function (cb) {
   pump([
         gulp.src(files),

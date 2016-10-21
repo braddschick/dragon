@@ -1,6 +1,6 @@
 {
   "name": "dragon_js",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Simple HTML 5 Drag'n Drop Library",
   "main": "index.js",
   "scripts": {
