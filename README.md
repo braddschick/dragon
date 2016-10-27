@@ -9,6 +9,26 @@ new Dragon([ID of the source container], [ID of the drop container],
 [HTMLElement that is going to be Dragged], ['copy' or 'move'], null, 
 [true to append the container or false to move to specifc spot where dropped]).set();
 ```
+### Example
+``` html
+<h2>Move the image but don't Append</h2>
+<div id="icon_area_move">
+    <img id="move" src="https://dummyimage.com/100x100/000/fff.png" />
+</div>
+<div id="drop1">
+</div>
+<h2>Copy the image and Append</h2>
+<div id="icon_area_copy">
+    <img id="copy" src="https://dummyimage.com/100x100/000/fff.png" width="100" height="100" />
+</div>
+<div id="drop2">
+</div>
+```
+
+``` javascript
+    new Dragon('#icon_area_move','#drop1','img','move').set();
+    new Dragon('icon_area_copy','#drop2','img','copy', null, true).set();
+```
 Oh, and that is it! No really you're done.
 You can add the _#_ to the Source and Container ID's if you want. 
 You also do not have to add ID's to the draggable objects Dragon will detect if the ID is not there and then insert its own. 
